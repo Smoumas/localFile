@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>UploadFile</title>
+</head>
+<body>
+    <h2>播放测试</h2>
+    <video th:src="@{'/video/'+${videoName}}" controls="true" width="100%">
+    <!--<video src="D:/localVideo/test.mp4" controls="true" width="100%">-->
+    </video>
+</body>
+</html>

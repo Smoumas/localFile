@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>VideoList</title>
+</head>
+<body>
+<h2>视频列表</h2>
+<div th:each="video : ${list}">
+    <a th:href="@{'/videoPage/'+${video}}" th:text="@{${video}}"></a>
+</div>
+</video>
+</body>
+</html>
