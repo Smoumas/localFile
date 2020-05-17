@@ -53,6 +53,14 @@ public class UploadController {
         File []videos = videoDir.listFiles();
         List<String> fileList = new ArrayList<String>();
         for(File videoFile:videos){
+            if(videoFile.getName().contains(" ") || videoFile.getName().contains("[")){
+                String newName = videoFile.getAbsolutePath().replace(" ","");
+                newName = newName.replace("[","");
+                newName = newName.replace("]","");
+                File newFile = new File(newName);
+                videoFile.renameTo(newFile);
+                videoFile = newFile;
+            }
             fileList.add(videoFile.getName());
         }
         model.addAttribute("list",fileList);
