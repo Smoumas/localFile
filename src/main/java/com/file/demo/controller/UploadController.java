@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,29 +74,33 @@ public class UploadController {
 
     @RequestMapping(value="/uploadContent",method = RequestMethod.POST)
     public String uploadContent(String text){
-        File file = new File("D:\\localUpload\\content.txt");
-        BufferedWriter bufferedWriter = null;
-        try {
-            bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
-            bufferedWriter.write(text);
-        }catch(FileNotFoundException e){
-            e.printStackTrace();
-            return "redirect:/fail";
-        }catch(IOException e){
-            e.printStackTrace();
-            return "redirect:/fail";
-        }finally{
-            if(bufferedWriter != null){
-                try {
-                    bufferedWriter.close();
-                }catch(IOException e){
-                    e.printStackTrace();
-                    return "redirect:/fail";
-                }
-            }
-        }
-        return "redirect:/success";
+        Clipboard clipBoard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        Transferable trans = new StringSelection(text);
+        clipBoard.setContents(trans,null);
 
+//        File file = new File("D:\\localUpload\\content.txt");
+//        BufferedWriter bufferedWriter = null;
+//        try {
+//            bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+//            bufferedWriter.write(text);
+//        }catch(FileNotFoundException e){
+//            e.printStackTrace();
+//            return "redirect:/fail";
+//        }catch(IOException e){
+//            e.printStackTrace();
+//            return "redirect:/fail";
+//        }finally{
+//            if(bufferedWriter != null){
+//                try {
+//                    bufferedWriter.close();
+//                }catch(IOException e){
+//                    e.printStackTrace();
+//                    return "redirect:/fail";
+//                }
+//            }
+//        }
+//        return "redirect:/success";
+        return "redirect:/uploadText";
     }
 
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
